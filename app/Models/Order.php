@@ -22,7 +22,7 @@ class Order extends Model
     /**
      * Return status history for the order.
      */
-    public function status() {
+    public function status_history() {
         return $this->belongsToMany(Status::class, 'histories')->withPivot('date');
     }
 }

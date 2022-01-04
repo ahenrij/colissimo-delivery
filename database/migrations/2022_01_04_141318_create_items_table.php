@@ -15,8 +15,8 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('no');
-            $table->binary('photo');
+            $table->string('no');
+            $table->binary('photo')->nullable();
             $table->string('title');
             $table->integer('quantity');
             $table->integer('order_id')->unsigned();

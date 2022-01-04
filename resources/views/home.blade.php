@@ -2,10 +2,19 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item active">Commandes</li>
+                <li class="list-group-item">A propos</li>
+            </ul>
+        </div>
+        <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('Commandes') }}</div>
+                <div class="card-header p-3 d-flex">
+                    <div class="pt-2">{{ __('Commandes') }}</div>
+                    <div class="btn btn-primary ml-auto">Nouvelle commande</div>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,14 +23,14 @@
                         </div>
                     @endif
 
-                    <table>
-                        <th>
-                            <td>#</td>
-                            <td>N° commande</td>
-                            <td>Client</td>
-                            <td>Site web</td>
-                            <td>Actions</td>
-                        </th>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>N° commande</th>
+                            <th>Client</th>
+                            <th>Site web</th>
+                            <th>Actions</th>
+                        </tr>
                         @foreach ($orders as $order)
                             <tr>
                                 <td>1</td>

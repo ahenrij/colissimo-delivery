@@ -2,6 +2,7 @@
 *Dockerfile*
 *docker-compose*
 vendor
+node_modules
 .idea
 .vscode
 confs

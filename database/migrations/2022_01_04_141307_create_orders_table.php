@@ -19,7 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('customer_name');
             $table->string('delivery_address');
             $table->string('website');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

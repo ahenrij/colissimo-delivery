@@ -20,7 +20,8 @@ class CreateHistoriesTable extends Migration
             $table->integer('status_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('status')->onDelete('restrict');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

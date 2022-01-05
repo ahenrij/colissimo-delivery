@@ -26,3 +26,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 Route::resource('orders', OrderController::class);
+
+Route::post('/orders/save', [OrderController::class, 'storeOrder'])->name('orders.store.ajax');

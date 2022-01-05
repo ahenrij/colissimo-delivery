@@ -1,13 +1,28 @@
 <?php
 
+/**
+ * A huge assomption is made in this controller.
+ * We assume that status are correctly ordered by id
+ * inside the database from 1 (Order treated) to 5 (Delivered)
+ * 
+ * This state is guaranteed by laravel migration but maybe not be if 
+ * database is installed by another mean.
+ */
+
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +41,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create');
     }
 
     /**
@@ -38,6 +53,40 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request)
     {
         //
+    }
+
+    /**
+     * Store a newly created order with related items from ajax request.
+     * 
+     * @param  \Illuminate\Http\Request $request
+     * @return json response
+     */
+    public function storeOrder(Request $request) {
+        
+        // Store order
+        DB::table('orders')->insert([
+            'customer_name' => $request->customer_name,
+            'delivery_address' => $request->delivery_address,
+            'website' => $request->website, 
+        ]);
+
+        // Store items
+        $items_data = [];
+        foreach ($request->items as $item) {
+            $items_data.push([
+                'title' => $item[0],
+                'quantity' => $item[0]
+            ]);
+        }
+        DB::table('items')->insert($items_data);
+
+        // Set first status in history
+        DB::table('history')->insert([
+            'order_id' => 1,
+            'status_id' => 1, // IMPORTANT! First status
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Order created successfully']);
     }
 
     /**

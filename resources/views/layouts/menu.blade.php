@@ -1,6 +1,6 @@
 <div>
     <ul class="list-group">
-        <li class="list-group-item active">Commandes</li>
-        <li class="list-group-item">A propos</li>
+        <li class="list-group-item active" onclick="window.location.href='{{ route('orders.index') }}'">Commandes</li>
+        <li class="list-group-item" onclick="window.location.href='{{ route('about') }}'">A propos</li>
     </ul>
 </div>

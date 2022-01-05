@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Show about page.
+     */
+    public function about()
+    {
+        return view('about');
+    }
 }

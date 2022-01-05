@@ -80,7 +80,7 @@ class OrderController extends Controller
         }
         DB::table('items')->insert($items_data);
 
-        // Set first status in history
+        // Set first status in history (date is current timestamp)
         DB::table('history')->insert([
             'order_id' => 1,
             'status_id' => 1, // IMPORTANT! First status

@@ -11,6 +11,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
@@ -62,31 +63,44 @@ class OrderController extends Controller
      * @return json response
      */
     public function storeOrder(Request $request) {
-        
-        // Store order
-        DB::table('orders')->insert([
-            'customer_name' => $request->customer_name,
-            'delivery_address' => $request->delivery_address,
-            'website' => $request->website, 
-        ]);
 
-        // Store items
-        $items_data = [];
-        foreach ($request->items as $item) {
-            $items_data.push([
-                'title' => $item[0],
-                'quantity' => $item[0]
+        DB::beginTransaction();
+
+        try {
+            // Store order
+            $order_id = DB::table('orders')->insertGetId([
+                'no' => $request->no,
+                'customer_name' => $request->customer_name,
+                'delivery_address' => $request->delivery_address,
+                'website' => $request->website, 
             ]);
+
+            // Store items
+            $items_data = [];
+            foreach ($request->items as $item) {
+                $items_data[] = [
+                    'no' => $item[0],
+                    'title' => $item[1],
+                    'quantity' => $item[2],
+                    'order_id' => $order_id
+                ];
+            }
+            DB::table('items')->insert($items_data);
+
+            // Set first status in history (date field is current timestamp)
+            DB::table('histories')->insert([
+                'order_id' => $order_id,
+                'status_id' => 1, // IMPORTANT! first status id
+            ]);
+
+            DB::commit();
+            return response()->json(['success' => true, 'message' => 'Order created successfully']);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+            return response()->json(['success' => false, 'message' => 'Une erreur est survenue: ' . $e->getMessage()]);            
         }
-        DB::table('items')->insert($items_data);
-
-        // Set first status in history (date is current timestamp)
-        DB::table('history')->insert([
-            'order_id' => 1,
-            'status_id' => 1, // IMPORTANT! First status
-        ]);
-
-        return response()->json(['success' => true, 'message' => 'Order created successfully']);
     }
 
     /**

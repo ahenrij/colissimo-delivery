@@ -6,7 +6,7 @@
             <div style="font-size: 1.5em">{{ __('Nouvelle commande') }}</div>
         </div>
         <div class="card-body">
-            <form id="id_order_form" action="{{ route('orders.store.ajax') }}">
+            <form id="id_order_form" action="{{ route('orders.store.ajax') }}" redirect="{{ route('orders.index') }}">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -58,6 +58,7 @@
                         <!--Display items list -->
                         <table class="table table-bordered" id="id_items_table" hidden>
                             <thead>
+                                <th>Article N°</th>
                                 <th>Description</th>
                                 <th>Quantité</th>
                             </thead>
@@ -68,6 +69,12 @@
                         <!--Form to add item to list -->
                         <table class="table table-bordered">
                             <tr>
+                                <td style="min-width: 100px">
+                                    <label for="id_item_no">Article N°</label>
+                                    <input type="text" class="form-control" name="item_no" id="id_item_no"
+                                        data-toggle="tooltip" data-placement="bottom" title="Champ obligatoire" 
+                                        onkeyup="addItemOnEnter(event)">
+                                </td>
                                 <td style="min-width: 350px">
                                     <label for="id_item_title">Description</label>
                                     <input type="text" class="form-control" name="item_title" id="id_item_title"
@@ -84,15 +91,16 @@
                         </table>
                         <p>
                         <div id="increment" value="0" hidden></div>
-                        <button type="button" onclick="addItem()" class="btn btn-outline-dark">Ajouter cet article</button>
-                        &nbsp;&nbsp; ou &nbsp;&nbsp;
-                        <button type="button" onclick="removeLastItem()" class="btn btn-danger">Supprimer le
+                        <button type="button" onclick="addItem()" class="btn btn-outline-dark mr-2">Ajouter cet article</button>
+                        <button type="button" onclick="removeLastItem()" class="btn btn-outline-danger">Supprimer le
                             dernier</button>
                         </p>
                     </div>
                 </div>
                 <div class="row">
-                    <button type="button" onclick="saveOrder()" class="btn btn-outline-dark">Ajouter cet article</button>
+                    <div class="form-group">
+                        <button type="button" onclick="saveOrder()" class="col-md-3 float-right btn btn-dark">{{ __('Enregistrer') }}</button>
+                    </div>
                 </div>
             </form>
         </div>

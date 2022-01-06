@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header p-3 d-flex">
             <div style="font-size: 1.5em">{{ __('Commandes') }}</div>
-            <a class="btn btn-primary pl-5 pr-5 ml-auto" href="{{ route('orders.create') }}">Nouvelle commande</a>
+            <a class="btn btn-primary ml-auto" href="{{ route('orders.create') }}">Nouvelle commande</a>
         </div>
 
         <div class="card-body">

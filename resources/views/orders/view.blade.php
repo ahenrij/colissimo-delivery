@@ -11,9 +11,9 @@
             <div class="col-md-4">
                 <div class="card p-4">
                     <div class="card-title text-center">{{ $order->history[0]->title }}</div>
-                    <div class="card-body">
-                        
-                        <p class="text-center mb-0">
+                    <div class="card-body d-flex justify-content-center flex-column">
+                        <img class="mb-5 mt-4 d-flex align-self-center" height="100" width="100" src="{{ asset('img/status/'. $order->history[0]->id .'.png') }}" alt="current_status">
+                        <p class="mb-0 text-center">
                             {{ $order->history[0]->description }}
                         </p>
                     </div>
@@ -53,6 +53,14 @@
                                 @endforeach
                             </ul>
                         </div>
+                    </div>
+                </div>
+                <div class="card bg-light p-4 mt-3">
+                    <div class="card-body p-0 ml-4 mt-2">
+                        <p class="text-center m-0">
+                            {{ __('Trouvez plus d\'informations sur votre commande sur le site web d\'achat') }}
+                            <a class="text-secondary" href="{{ $order->website }}" target="_blank">ici</a>
+                        </p>
                     </div>
                 </div>
             </div>

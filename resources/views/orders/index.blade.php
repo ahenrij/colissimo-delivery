@@ -24,13 +24,26 @@
                 </tr>
                 @foreach ($orders as $order)
                     <tr>
-                        <td>1</td>
+                        <td>{!! isset($i) ? ++$i : ($i = 1) !!}</td>
                         <td>{{ $order->no }}</td>
                         <td>{{ $order->customer_name }}</td>
                         <td>{{ $order->website }}</td>
-                        <td>
-                            #
-                        </td>
+                        <div class="dropdown">
+                        <td><button class="btn btn-outline-secondary dropdown-toggle" type="button" id="id_actions_{{ $order->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actions
+                          </button></td>
+                          <div class="dropdown-menu" aria-labelledby="id_actions_{{ $order->id }}">
+                            <a href="{{ route('orders.show', [$order->id]) }}" class="dropdown-item">Voir</a>
+                            <a href="{{ route('orders.edit', [$order->id]) }}" class="dropdown-item">Modifier</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['orders.destroy', $order->id]]) !!}
+                            <li><a href="#!" onclick="$('#del_order{{ $order->id }}').click();"
+                                    class="dropdown-item">Supprimer</a></li>
+                            {!! Form::submit('Supprimer', ['id' => 'del_order' . $order->id, 'hidden' => true, 'class' => 'btn btn-danger', 'onclick' => 'return confirm(\'Vraiment supprimer cette commande ?\')']) !!}
+                            {!! Form::close() !!}
+                          </div>
+                        </div>
                     </tr>
                 @endforeach
             </table>

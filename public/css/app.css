@@ -11286,3 +11286,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.menu > li {
+  cursor: pointer !important;
+}

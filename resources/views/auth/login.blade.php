@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">{{ __('Connexion') }}</div>
+                    <div class="card-header" style="font-size: 1.5em">{{ __('Connexion') }}</div>
     
                     <div class="card-body mt-3 mb-3">
                         <form method="POST" action="{{ route('login') }}">
@@ -59,7 +59,7 @@
                                     </button>
     
                                     @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        <a class="btn btn-link text-dark" href="{{ route('password.request') }}">
                                             {{ __('Mot de passe oublié ?') }}
                                         </a>
                                     @endif

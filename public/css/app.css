@@ -11290,3 +11290,12 @@ textarea.form-control-lg {
 .menu > li {
   cursor: pointer !important;
 }
+
+.list-group-item.active {
+  background-color: #1E1E1E !important;
+  border-color: #1E1E1E !important;
+}
+
+.list-group-item:hover {
+  background-color: #eee;
+}

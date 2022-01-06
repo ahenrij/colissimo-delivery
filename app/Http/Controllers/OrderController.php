@@ -111,7 +111,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $status = DB::table('status')->get();
+        return view('orders.view', compact('order', 'status'));
     }
 
     /**

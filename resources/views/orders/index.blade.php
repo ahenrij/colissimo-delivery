@@ -20,7 +20,7 @@
                     <th>N° commande</th>
                     <th>Client</th>
                     <th>Site web</th>
-                    <th>Actions</th>
+                    <th>#</th>
                 </tr>
                 @foreach ($orders as $order)
                     <tr>
@@ -29,21 +29,21 @@
                         <td>{{ $order->customer_name }}</td>
                         <td>{{ $order->website }}</td>
                         <div class="dropdown">
-                        <td><button class="btn btn-outline-secondary dropdown-toggle" type="button" id="id_actions_{{ $order->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Actions
-                          </button></td>
-                          <div class="dropdown-menu" aria-labelledby="id_actions_{{ $order->id }}">
-                            <a href="{{ route('orders.show', [$order->id]) }}" class="dropdown-item">Voir</a>
-                            <a href="{{ route('orders.edit', [$order->id]) }}" class="dropdown-item">Modifier</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['orders.destroy', $order->id]]) !!}
-                            <li><a href="#!" onclick="$('#del_order{{ $order->id }}').click();"
-                                    class="dropdown-item">Supprimer</a></li>
-                            {!! Form::submit('Supprimer', ['id' => 'del_order' . $order->id, 'hidden' => true, 'class' => 'btn btn-danger', 'onclick' => 'return confirm(\'Vraiment supprimer cette commande ?\')']) !!}
-                            {!! Form::close() !!}
+                        <td><div class="dropdown show">
+                            <a style="color: black" class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="id_actions_{{ $order->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Actions
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="id_actions_{{ $order->id }}">
+                                <a href="{{ route('orders.show', [$order->id]) }}" class="dropdown-item">Voir</a>
+                                <a href="{{ route('orders.edit', [$order->id]) }}" class="dropdown-item">Modifier</a>
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['orders.destroy', $order->id]]) !!}
+                                <li><a href="#!" onclick="$('#del_order{{ $order->id }}').click();"
+                                        class="dropdown-item">Supprimer</a></li>
+                                {!! Form::submit('Supprimer', ['id' => 'del_order' . $order->id, 'hidden' => true, 'class' => 'btn btn-danger', 'onclick' => 'return confirm(\'Vraiment supprimer cette commande ?\')']) !!}
+                                {!! Form::close() !!}
+                            </div>
                           </div>
-                        </div>
+                        </td> 
                     </tr>
                 @endforeach
             </table>

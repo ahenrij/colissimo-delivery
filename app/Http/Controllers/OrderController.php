@@ -111,8 +111,9 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $status = DB::table('status')->get();
-        return view('orders.view', compact('order', 'status'));
+        $status = DB::table('status')->get(); // all status
+        $status_history = $order->history()->orderBy('date', 'desc')->get();
+        return view('orders.view', compact('order', 'status', 'status_history'));
     }
 
     /**
@@ -147,6 +148,6 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
-        return redirect()->back();
+        return redirect()->back()->withStatus('Success !');
     }
 }

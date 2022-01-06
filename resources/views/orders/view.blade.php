@@ -10,11 +10,11 @@
         <div class="row mt-3">
             <div class="col-md-4">
                 <div class="card p-4">
-                    <div class="card-title text-center">{{ $order->history[0]->title }}</div>
+                    <div class="card-title text-center">{{ $status_history[0]->title }}</div>
                     <div class="card-body d-flex justify-content-center flex-column">
-                        <img class="mb-5 mt-4 d-flex align-self-center" height="100" width="100" src="{{ asset('img/status/'. $order->history[0]->id .'.png') }}" alt="current_status">
+                        <img class="mb-5 mt-4 d-flex align-self-center" height="100" width="100" src="{{ asset('img/status/'. $status_history[0]->id .'.png') }}" alt="current_status">
                         <p class="mb-0 text-center">
-                            {{ $order->history[0]->description }}
+                            {{ $status_history[0]->description }}
                         </p>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="card-title">{{ __('Suivi des colis') }}</div>
                     <div class="card-body p-0 mt-4">
                         <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ count($order->history) * (100/count($status)) }}%" aria-valuenow="{{ count($order->history) * (100/count($status)) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ count($status_history) * (100/count($status)) }}%" aria-valuenow="{{ count($status_history) * (100/count($status)) }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="mt-2">
                             <span>{{ __('A l\'entrepôt') }}</span>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="mt-4">
                             <ul class="list-group list-group-flush">
-                                @foreach ($order->history as $_status)
+                                @foreach ($status_history as $_status)
                                 <li class="pl-0 pr-0 list-group-item">
                                     <span class="text-secondary text-uppercase mb-0">{{ $_status->pivot->date }}</span>
                                     <br>

@@ -14,7 +14,7 @@
                 </div>
             @endif
 
-            <table class="table">
+            <table class="table table-responsive">
                 <tr>
                     <th>#</th>
                     <th>N° commande</th>

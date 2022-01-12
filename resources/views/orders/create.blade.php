@@ -91,7 +91,7 @@
                         </table>
                         <p>
                         <div id="increment" value="0" hidden></div>
-                        <button type="button" onclick="addItem()" class="btn btn-outline-dark mr-2">Ajouter cet article</button>
+                        <button type="button" onclick="addItem()" class="btn btn-outline-primary mr-2">Ajouter cet article</button>
                         <button type="button" onclick="removeLastItem()" class="btn btn-outline-danger">Supprimer le
                             dernier</button>
                         </p>

@@ -173,7 +173,7 @@ function getItems() {
     return items
 }
 
-$('#id_0').datetimepicker({
+$('#datetime').datetimepicker({
     "allowInputToggle": true,
     "showClose": true,
     "showClear": true,

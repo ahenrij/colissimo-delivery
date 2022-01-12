@@ -20,10 +20,10 @@ class StatusSeeder extends Seeder
         ]);
         DB::table('status')->insert([
             'title' => 'En attente d\'expédition',
-            'description' => 'La commande est en cours de préparation et va bientôt être prise en charge par Post Colissima',
+            'description' => 'La commande est en cours de préparation et va bientôt être prise en charge par ' . config('app.name', 'Laravel'),
         ]);
         DB::table('status')->insert([
-            'title' => 'Expédié',
+            'title' => 'Commande expédiée',
             'description' => 'Le colis est en cours d\'acheminement.',
         ]);
         DB::table('status')->insert([
@@ -31,7 +31,7 @@ class StatusSeeder extends Seeder
             'description' => 'Le colis sera livré très bientôt.',
         ]);
         DB::table('status')->insert([
-            'title' => 'Livré',
+            'title' => 'Commande livrée',
             'description' => 'Le colis a été livré avec succès.',
         ]);
     }

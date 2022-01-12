@@ -6,7 +6,7 @@
             onclick="window.location.href='{{ route('orders.index') }}'">Commandes</li>
         <li class="list-group-item @if (Request::route()->getName() == 'about') active @endif" onclick="window.location.href='{{ route('about') }}'">A
             propos</li>
-        <li class="list-group-item" onclick="event.preventDefault();
+        <li class="list-group-item text-danger" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
             {{ __('Déconnexion') }}
         </li>

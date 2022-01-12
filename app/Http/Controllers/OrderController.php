@@ -136,9 +136,13 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(UpdateOrderRequest $request, Order $order)
     {
-        $date = \DateTime::createFromFormat('d/m/Y H:i:s', $request->datetime);
+        try {
+            $date = \DateTime::createFromFormat('d/m/Y H:i:s', $request->datetime);
+        } catch (Exception $e) {
+            return redirect()->back()->withError('Format requis: dd/MM/yyyy hh:mm:ss');
+        }
         $next_status = $order->nextStatus();
 
         if ($next_status) {

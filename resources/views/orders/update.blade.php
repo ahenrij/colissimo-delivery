@@ -37,6 +37,9 @@
                                 <i id="cal" class="bi bi-calendar-event"></i>
                             </span>
                         </div>
+                        @if(session('error'))
+                            <small class="text-danger">{{ session('error') }}</small>
+                        @endif
                     </div>
                     {!! Form::submit('Mettre à l\'état suivant', ['class' => 'btn btn-warning mt-4 px-5 float-end']) !!}
                     {!! Form::close() !!}

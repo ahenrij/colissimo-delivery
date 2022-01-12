@@ -124,7 +124,9 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $status_history = $order->history()->orderBy('date', 'desc')->get();
+        $next_status = DB::table('status')->where('id', $status_history[0]->id + 1)->first();
+        return view('orders.update', compact('order', 'status_history', 'next_status'));
     }
 
     /**

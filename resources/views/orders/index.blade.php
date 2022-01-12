@@ -3,8 +3,10 @@
 @section('content')
     <div class="card">
         <div class="card-header p-3 d-flex">
-            <div style="font-size: 1.5em">{{ __('Commandes') }}</div>
-            <a class="btn btn-outline-dark ml-auto" href="{{ route('orders.create') }}">Nouvelle commande</a>
+            <div class="row d-flex" style="width: 100%">
+                <div style="font-size: 1.5em" class="col-md-3">{{ __('Commandes') }}</div>
+                <a class="btn btn-outline-dark ml-auto offset-md-6 col-md-3" href="{{ route('orders.create') }}">Nouvelle commande</a>
+            </div>
         </div>
 
         <div class="card-body">
@@ -34,7 +36,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="id_actions_{{ $order->id }}">
                                 <a href="{{ route('orders.show', [$order->id]) }}" class="dropdown-item">Voir</a>
-                                <a href="{{ route('orders.edit', [$order->id]) }}" class="dropdown-item">Modifier</a>
+                                <a href="{{ route('orders.edit', [$order->id]) }}" class="dropdown-item">Modifier le statut</a>
                                 {!! Form::open(['method' => 'DELETE', 'route' => ['orders.destroy', $order->id]]) !!}
                                 <li><a href="#!" onclick="$('#del_order{{ $order->id }}').click();"
                                         class="dropdown-item">Supprimer</a></li>

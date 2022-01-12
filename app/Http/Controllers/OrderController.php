@@ -112,7 +112,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $status = DB::table('status')->get(); // all status
-        $status_history = $order->history()->orderBy('date', 'desc')->get();
+        $status_history = $order->orderedStatusHistory();
         return view('orders.view', compact('order', 'status', 'status_history'));
     }
 
@@ -124,8 +124,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        $status_history = $order->history()->orderBy('date', 'desc')->get();
-        $next_status = DB::table('status')->where('id', $status_history[0]->id + 1)->first();
+        $status_history = $order->orderedStatusHistory();
+        $next_status = $order->nextStatus();
         return view('orders.update', compact('order', 'status_history', 'next_status'));
     }
 
@@ -136,9 +136,21 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(Request $request, Order $order)
     {
-        //
+        $date = \DateTime::createFromFormat('d/m/Y H:i:s', $request->datetime);
+        $next_status = $order->nextStatus();
+
+        if ($next_status) {
+            DB::table('histories')->insert([
+                'order_id' => $order->id,
+                'status_id' => $next_status->id,
+                'date' => $date
+            ]);
+            return redirect()->route('orders.index')->withStatus('Success !');
+        } else {
+            return redirect()->back()->withError('Prochain statut non défini !');
+        }
     }
 
     /**

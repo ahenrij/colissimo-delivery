@@ -28,7 +28,7 @@
                 <div>
                     <small class="text-uppercase text-warning" style="font-weight: 600">{{ __('Etat suivant') }}</small>
                     <p class="text-lead mt-2 alert alert-warning">{{ $next_status->title }}</p>
-                    {!! Form::open(['method' => 'POST', 'route' => ['orders.update', $order->id]]) !!}
+                    {!! Form::open(['method' => 'PUT', 'route' => ['orders.update', $order->id]]) !!}
                     <div class="form-group col-md-4 ml-0 p-0">
                         <label for="datetime" class="control-label text-uppercase">Date</label>
                         <div class="input-group">
@@ -38,12 +38,12 @@
                             </span>
                         </div>
                     </div>
-                    {!! Form::submit('Mettre à jour', ['class' => 'btn btn-dark mt-4 px-5 float-end']) !!}
+                    {!! Form::submit('Mettre à l\'état suivant', ['class' => 'btn btn-warning mt-4 px-5 float-end']) !!}
                     {!! Form::close() !!}
                 </div>
             @else
                 <div>
-                    <p class="text-lead alert alert-danger">Commande déjà livrée !</p>
+                    <p class="text-lead alert alert-success">Commande déjà livrée !</p>
                 </div>
             @endif
         </div>

@@ -27,4 +27,6 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 Route::resource('orders', OrderController::class);
 
+Route::get('/orders/{orderNo}/status/{customerName}', [OrderController::class, 'status'])->name('orders.status');
+
 Route::post('/orders/save', [OrderController::class, 'storeOrder'])->name('orders.store.ajax');

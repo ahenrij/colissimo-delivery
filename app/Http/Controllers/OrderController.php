@@ -21,7 +21,7 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['status']]);
     }
 
     /**
@@ -114,6 +114,21 @@ class OrderController extends Controller
         $status = DB::table('status')->get(); // all status
         $status_history = $order->orderedStatusHistory();
         return view('orders.view', compact('order', 'status', 'status_history'));
+    }
+
+    public function status($orderNo, $customerName)
+    {
+        $order = Order::where([
+                    ['no', '=', $orderNo],
+                    ['customer_name', 'like', $customerName]
+                ])
+                ->first();
+
+        if(!$order) {
+            abort(403);
+        } else {
+            return $this->show($order);
+        }
     }
 
     /**

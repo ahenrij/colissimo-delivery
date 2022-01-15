@@ -67,13 +67,14 @@ class OrderController extends Controller
         DB::beginTransaction();
 
         try {
+            $delivery_expected_at = \DateTime::createFromFormat('d/m/Y H:i:s', $request->delivery_expected_at);
             // Store order
             $order_id = DB::table('orders')->insertGetId([
                 'no' => $request->no,
                 'customer_name' => $request->customer_name,
                 'delivery_address' => $request->delivery_address,
                 'website' => $request->website,
-                'delivery_expected_at' => $request->delivery_expected_at,
+                'delivery_expected_at' => $delivery_expected_at,
             ]);
 
             // Store items
@@ -100,7 +101,7 @@ class OrderController extends Controller
         } catch (\Exception $e) {
 
             DB::rollback();
-            return response()->json(['success' => false, 'message' => 'Une erreur est survenue: ' . $e->getMessage()]);            
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);            
         }
     }
 

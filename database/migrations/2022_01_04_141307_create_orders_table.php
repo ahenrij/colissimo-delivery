@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('customer_name');
             $table->string('delivery_address');
             $table->string('website');
-            $table->date('delivery_expected_at')->nullable()->default(null);
+            $table->timestamp('delivery_expected_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

@@ -7,7 +7,7 @@
         <br>
         <h4 class="text-secondary mt-4">{{ __('Commande ') . $order->no }}</h4>
         @if(!is_null($order->delivery_expected_at))
-            <p class="text-secondary">{{ __('Livraison prévue pour le ') . strftime("%d/%m/%Y", strtotime($order->delivery_expected_at)) }}</p>
+            <p class="text-secondary">{{ __('Livraison prévue pour le ') . strftime("%d/%m/%Y à %H:%M:%S", strtotime($order->delivery_expected_at)) }}</p>
         @endif
         <div class="row mt-3">
             <div class="col-md-4">

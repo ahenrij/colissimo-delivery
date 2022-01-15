@@ -49,6 +49,15 @@
                                 </div>
                             @endif
                         </div>
+                        <div class="form-group">
+                            <label for="delivery_expected_at">{{ __('Date de livraison prévue') }}</label>
+                            <input type="date" class="form-control" value="{{ date('Y-m-d') }}" id="delivery_expected_at" name="delivery_expected_at">
+                            @if ($errors->has('delivery_expected_at'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('delivery_expected_at') }}
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
                 <div class="row">

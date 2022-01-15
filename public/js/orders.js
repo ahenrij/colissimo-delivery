@@ -94,6 +94,7 @@ function saveOrder() {
     form.customerName = $('#customer_name')
     form.deliveryAddress = $('#delivery_address')
     form.website = $('#website')
+    form.deliveryExpectedAt = $('#delivery_expected_at')
     form.itemsTable = $('#id_items_table')
 
     if (!validateSaveOrderForm(form)) {
@@ -110,6 +111,7 @@ function saveOrder() {
             'customer_name': form.customerName.val(),
             'delivery_address': form.deliveryAddress.val(),
             'website': form.website.val(),
+            'delivery_expected_at': form.deliveryExpectedAt.val(),
             'items': items
         },
         dataType: 'json',
@@ -146,6 +148,10 @@ function validateSaveOrderForm(form) {
     }
     if (form.deliveryAddress.val() == '') {
         alert("Delivery address field is mandatory")
+        return false
+    }
+    if (form.deliveryExpectedAt.val() == '') {
+        alert("Delivery expected date field is mandatory")
         return false
     }
     if (form.itemsTable.is(':hidden')) {

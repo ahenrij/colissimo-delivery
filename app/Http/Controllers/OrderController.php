@@ -72,7 +72,8 @@ class OrderController extends Controller
                 'no' => $request->no,
                 'customer_name' => $request->customer_name,
                 'delivery_address' => $request->delivery_address,
-                'website' => $request->website, 
+                'website' => $request->website,
+                'delivery_expected_at' => $request->delivery_expected_at,
             ]);
 
             // Store items

@@ -6,7 +6,9 @@
 
         <br>
         <h4 class="text-secondary mt-4">{{ __('Commande ') . $order->no }}</h4>
-
+        @if(!is_null($order->delivery_expected_at))
+            <p class="text-secondary">{{ __('Livraison prévue pour le ') . strftime("%d/%m/%Y", strtotime($order->delivery_expected_at)) }}</p>
+        @endif
         <div class="row mt-3">
             <div class="col-md-4">
                 <div class="card p-4">
@@ -44,7 +46,7 @@
                             <ul class="list-group list-group-flush">
                                 @foreach ($status_history as $_status)
                                 <li class="pl-0 pr-0 list-group-item">
-                                    <span class="text-secondary text-uppercase mb-0">{{ $_status->pivot->date }}</span>
+                                    <span class="text-secondary text-uppercase mb-0">{{ strftime("%d/%m/%Y %H:%M:%S", strtotime($_status->pivot->date)) }}</span>
                                     <br>
                                     <span class="text-dark mt-0 mr-1">{{ $_status->title }}</span>
                                     <br>
